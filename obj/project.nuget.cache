@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "ea8YqhpBm6A=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Gir\\Repos\\pattern-YT-RECREATE\\pattern-YT-RECREATE.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gir\\.nuget\\packages\\csfml\\2.6.1\\csfml.2.6.1.nupkg.sha512",
+    "C:\\Users\\Gir\\.nuget\\packages\\sfml.audio\\2.6.0\\sfml.audio.2.6.0.nupkg.sha512",
+    "C:\\Users\\Gir\\.nuget\\packages\\sfml.graphics\\2.6.0\\sfml.graphics.2.6.0.nupkg.sha512",
+    "C:\\Users\\Gir\\.nuget\\packages\\sfml.net\\2.6.0\\sfml.net.2.6.0.nupkg.sha512",
+    "C:\\Users\\Gir\\.nuget\\packages\\sfml.system\\2.6.0\\sfml.system.2.6.0.nupkg.sha512",
+    "C:\\Users\\Gir\\.nuget\\packages\\sfml.window\\2.6.0\\sfml.window.2.6.0.nupkg.sha512"
+  ],
+  "logs": []
+}
