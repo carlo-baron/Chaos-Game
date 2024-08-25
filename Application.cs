@@ -18,6 +18,10 @@ class Application{
 
     int patternCount;
     int patternCountMax = 10000;
+    int iterationCount = 0;
+
+    Font vt323 = new Font("VT323-Regular.ttf");
+
     public Application(uint Width, uint Height, string Title){
         width = Width;
         height = Height;
@@ -35,6 +39,7 @@ class Application{
                 //reset
                 dots.Clear();
                 patternCount = patternCountMax;
+                iterationCount = 0;
                 firstDot = true;
             }
         };
@@ -80,10 +85,19 @@ class Application{
         };
         #endregion
 
-        MainLoop(body, [specialPoint1, specialPoint2, specialPoint3]);
+        #region Text
+        Text iteration = new Text(){
+            Font = vt323,
+            DisplayedString = $"Iteration: {iterationCount}",
+            CharacterSize = 24,
+            Position = new Vector2f(5,5)
+        };
+        #endregion
+
+        MainLoop(body, iteration,[specialPoint1, specialPoint2, specialPoint3]);
     }
 
-    void MainLoop(CircleShape circle, CircleShape[] specialPoints){
+    void MainLoop(CircleShape circle, Text text, CircleShape[] specialPoints){
         while(window.IsOpen){
             window.Clear();
             window.DispatchEvents();
@@ -102,10 +116,12 @@ class Application{
                 if(patternCount >= 0){
                     if(lastDot != null){
                         PatternMaking(lastDot, specialPoints);
+                        text.DisplayedString = $"Iteration: {iterationCount}";
                     }
                 }
             }
-
+            
+            window.Draw(text);
             window.Display();
         }
     }
@@ -125,6 +141,7 @@ class Application{
         
         dots.Add(newDot);
 
+        iterationCount++;
         patternCount--;
     }
 
