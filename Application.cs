@@ -6,7 +6,7 @@ class Application{
     RenderWindow window;
     uint bodySize = 200;
     float bodyThickness = 5;
-    uint dotSize = 5;
+    uint dotSize = 1;
     
     
     uint width;
@@ -15,6 +15,9 @@ class Application{
 
     bool firstDot = true;
     List<Dot> dots = new List<Dot>();
+
+    int patternCount;
+    int patternCountMax = 10000;
     public Application(uint Width, uint Height, string Title){
         width = Width;
         height = Height;
@@ -22,6 +25,7 @@ class Application{
 
         VideoMode mode = new VideoMode(width, height);
         window = new RenderWindow(mode, windowTitle, Styles.Close);
+        patternCount = patternCountMax;
 
 
         #region Events
@@ -30,6 +34,7 @@ class Application{
             if(args.Code == Keyboard.Key.R){
                 //reset
                 dots.Clear();
+                patternCount = patternCountMax;
                 firstDot = true;
             }
         };
@@ -88,12 +93,39 @@ class Application{
                 window.Draw(points);
             }
             
-            foreach(Dot dot in dots){
-                window.Draw(dot);
+            if(dots.Count > 0){
+                Dot? lastDot = null;
+                foreach(Dot dot in dots){
+                    window.Draw(dot);
+                    lastDot = dot;
+                }
+                if(patternCount >= 0){
+                    if(lastDot != null){
+                        PatternMaking(lastDot, specialPoints);
+                    }
+                }
             }
 
             window.Display();
         }
+    }
+
+    void PatternMaking(CircleShape dot, CircleShape[] specialPoints){
+        Random random = new Random();
+        int randomPoint = random.Next(specialPoints.Count());
+
+        float midpointX = (dot.Position.X + specialPoints[randomPoint].Position.X) / 2;
+        float midpointY = (dot.Position.Y + specialPoints[randomPoint].Position.Y) / 2;
+        Vector2f midpoint = new Vector2f(midpointX, midpointY);
+
+        Dot newDot = new Dot(dotSize){
+                    Position = midpoint,
+                    FillColor = Color.Blue,
+                };
+        
+        dots.Add(newDot);
+
+        patternCount--;
     }
 
     Vector2f SpecialPosition(float angle, CircleShape body){
