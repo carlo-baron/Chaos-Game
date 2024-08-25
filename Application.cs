@@ -5,6 +5,7 @@ using SFML.System;
 class Application{
     RenderWindow window;
     uint bodySize = 200;
+    uint dotSize = 5;
     
     uint width;
     uint height;
@@ -34,17 +35,24 @@ class Application{
             Origin = new Vector2f(bodySize, bodySize),
             Position = new Vector2f(window.Size.X / 2, window.Size.Y / 2),
         };
+
+        CircleShape dot = new CircleShape(dotSize){
+            Origin = new Vector2f(dotSize, dotSize),
+            Position = new Vector2f(window.Size.X / 2, window.Size.Y / 2),
+
+        };
         #endregion
 
-        MainLoop(body);
+        MainLoop(body, dot);
     }
 
-    void MainLoop(CircleShape circle){
+    void MainLoop(CircleShape circle, CircleShape dot){
         while(window.IsOpen){
             window.Clear();
             window.DispatchEvents();
 
             window.Draw(circle);
+            window.Draw(dot);
 
             window.Display();
         }

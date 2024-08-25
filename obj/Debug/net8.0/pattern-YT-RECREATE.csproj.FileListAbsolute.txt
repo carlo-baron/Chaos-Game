@@ -196,3 +196,4 @@ C:\Users\Gir\Repos\pattern-YT-RECREATE\obj\Debug\net8.0\refint\pattern-YT-RECREA
 C:\Users\Gir\Repos\pattern-YT-RECREATE\obj\Debug\net8.0\pattern-YT-RECREATE.pdb
 C:\Users\Gir\Repos\pattern-YT-RECREATE\obj\Debug\net8.0\pattern-YT-RECREATE.genruntimeconfig.cache
 C:\Users\Gir\Repos\pattern-YT-RECREATE\obj\Debug\net8.0\ref\pattern-YT-RECREATE.dll
+C:\Users\Gir\Repos\pattern-YT-RECREATE\obj\Debug\net8.0\pattern-YT-RECREATE.sourcelink.json
