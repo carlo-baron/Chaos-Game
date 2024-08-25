@@ -5,6 +5,7 @@ using SFML.System;
 class Application{
     RenderWindow window;
     uint bodySize = 200;
+    float bodyThickness = 5;
     uint dotSize = 5;
     
     
@@ -28,6 +29,7 @@ class Application{
         window.KeyPressed += (sender, args) => {
             if(args.Code == Keyboard.Key.R){
                 //reset
+                dots.Clear();
                 firstDot = true;
             }
         };
@@ -48,27 +50,61 @@ class Application{
 
         #region Shapes
         CircleShape body = new CircleShape(bodySize){
-            OutlineThickness = 5f,
+            OutlineThickness = bodyThickness,
             FillColor = Color.Black,
             Origin = new Vector2f(bodySize, bodySize),
             Position = new Vector2f(window.Size.X / 2, window.Size.Y / 2),
         };
+
+        CircleShape specialPoint1 = new CircleShape(5){
+            FillColor = Color.Green,
+            Origin = new Vector2f(5,5),
+            Position = SpecialPosition(90, body)
+        };
+
+        CircleShape specialPoint2 = new CircleShape(5){
+            FillColor = Color.Green,
+            Origin = new Vector2f(5,5),
+            Position = SpecialPosition(225, body)
+        };
+
+        CircleShape specialPoint3 = new CircleShape(5){
+            FillColor = Color.Green,
+            Origin = new Vector2f(5,5),
+            Position = SpecialPosition(315, body)
+        };
         #endregion
 
-        MainLoop(body);
+        MainLoop(body, [specialPoint1, specialPoint2, specialPoint3]);
     }
 
-    void MainLoop(CircleShape circle){
+    void MainLoop(CircleShape circle, CircleShape[] specialPoints){
         while(window.IsOpen){
             window.Clear();
             window.DispatchEvents();
 
             window.Draw(circle);
+            foreach(CircleShape points in specialPoints){
+                window.Draw(points);
+            }
+            
             foreach(Dot dot in dots){
                 window.Draw(dot);
             }
 
             window.Display();
         }
+    }
+
+    Vector2f SpecialPosition(float angle, CircleShape body){
+        float radians = DegToRad(angle);
+        float xCoordinate = body.Position.X + (bodySize * MathF.Cos(radians));
+        float YCoordinate = body.Position.Y - (bodySize * MathF.Sin(radians));
+
+        return new Vector2f(xCoordinate, YCoordinate);
+    }
+
+    float DegToRad(float degree){
+        return degree * (MathF.PI / 180);
     }
 }
