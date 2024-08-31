@@ -15,6 +15,8 @@ class Application{
 
     bool firstDot = true;
     List<Dot> dots = new List<Dot>();
+    CircleShape[] specialPoints = new CircleShape[12];
+    float[] angles = {0,30,60,90,120,150,180,210,240,270,300,330};
 
     int patternCount;
     int patternCountMax = 10000;
@@ -22,10 +24,18 @@ class Application{
 
     Font vt323 = new Font("VT323-Regular.ttf");
 
-    public Application(uint Width, uint Height, string Title){
+    public enum Pattern{
+        TRIANGLE,
+        CIRCLE
+    }
+
+
+    Pattern myPattern;
+    public Application(uint Width, uint Height, string Title, Pattern pattern){
         width = Width;
         height = Height;
         windowTitle = Title;
+        myPattern = pattern;
 
         VideoMode mode = new VideoMode(width, height);
         window = new RenderWindow(mode, windowTitle, Styles.Close);
@@ -66,23 +76,14 @@ class Application{
             Position = new Vector2f(window.Size.X / 2, window.Size.Y / 2),
         };
 
-        CircleShape specialPoint1 = new CircleShape(5){
+        // Special points (circle of fifths)
+        for(int i = 0; i < specialPoints.Length; i++){
+            specialPoints[i] = new CircleShape(5){
             FillColor = Color.Green,
             Origin = new Vector2f(5,5),
-            Position = SpecialPosition(90, body)
-        };
-
-        CircleShape specialPoint2 = new CircleShape(5){
-            FillColor = Color.Green,
-            Origin = new Vector2f(5,5),
-            Position = SpecialPosition(225, body)
-        };
-
-        CircleShape specialPoint3 = new CircleShape(5){
-            FillColor = Color.Green,
-            Origin = new Vector2f(5,5),
-            Position = SpecialPosition(315, body)
-        };
+            Position = SpecialPosition(angles[i], body)
+            };
+        }
         #endregion
 
         #region Text
@@ -94,10 +95,10 @@ class Application{
         };
         #endregion
 
-        MainLoop(body, iteration,[specialPoint1, specialPoint2, specialPoint3]);
+        MainLoop(body, iteration);
     }
 
-    void MainLoop(CircleShape circle, Text text, CircleShape[] specialPoints){
+    void MainLoop(CircleShape circle, Text text){
         while(window.IsOpen){
             window.Clear();
             window.DispatchEvents();
@@ -115,7 +116,7 @@ class Application{
                 }
                 if(patternCount >= 0){
                     if(lastDot != null){
-                        PatternMaking(lastDot, specialPoints);
+                        PatternMaking(lastDot);
                         text.DisplayedString = $"Iteration: {iterationCount}";
                     }
                 }
@@ -126,23 +127,48 @@ class Application{
         }
     }
 
-    void PatternMaking(CircleShape dot, CircleShape[] specialPoints){
-        Random random = new Random();
-        int randomPoint = random.Next(specialPoints.Count());
-
-        float midpointX = (dot.Position.X + specialPoints[randomPoint].Position.X) / 2;
-        float midpointY = (dot.Position.Y + specialPoints[randomPoint].Position.Y) / 2;
-        Vector2f midpoint = new Vector2f(midpointX, midpointY);
+    void PatternMaking(CircleShape dot){
+        Vector2f specialPosition = new Vector2f(0,0);
+        
+        switch(myPattern){
+            case Pattern.TRIANGLE:
+                specialPosition = TrianglePattern(dot);
+                break;
+            case Pattern.CIRCLE:
+                specialPosition = CirclePattern(dot);
+                break;
+        }
+        
 
         Dot newDot = new Dot(dotSize){
-                    Position = midpoint,
-                    FillColor = Color.Blue,
+                    Position = specialPosition,
                 };
         
         dots.Add(newDot);
 
         iterationCount++;
         patternCount--;
+    }
+
+    Vector2f CirclePattern(CircleShape dot){
+        Random random = new Random();
+        int randomPoint = random.Next(specialPoints.Count());
+
+        Vector2f lineVector = specialPoints[randomPoint].Position - dot.Position;
+        Vector2f scaledVector = lineVector * 0.789f;
+
+        return dot.Position + scaledVector;
+    }
+
+    Vector2f TrianglePattern(CircleShape dot){
+        CircleShape[] newSpecialPoints = [specialPoints[3], specialPoints[7], specialPoints[11]];
+
+        Random random = new Random();
+        int randomPoint = random.Next(newSpecialPoints.Count());
+
+        float midpointX = (dot.Position.X + newSpecialPoints[randomPoint].Position.X) / 2;
+        float midpointY = (dot.Position.Y + newSpecialPoints[randomPoint].Position.Y) / 2;
+        return new Vector2f(midpointX, midpointY);
     }
 
     Vector2f SpecialPosition(float angle, CircleShape body){
