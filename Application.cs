@@ -30,6 +30,7 @@ class Application{
         TRIANGLE,
         CIRCLE,
         HEXAGON,
+        CARPET,
     }
 
     PatternStates myPattern;

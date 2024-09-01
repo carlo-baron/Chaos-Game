@@ -38,5 +38,9 @@ class Patterns{
         Vector2f scaledVector = vectorCalculations.LineVector(hexagonVertices, randomPoint, dot, 0.667f);
 
         return dot.Position + scaledVector;
-    }    
+    }
+
+    // public Vector2f CarpetPattern(CircleShape dot){
+
+    // }
 }
