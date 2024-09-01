@@ -8,7 +8,6 @@ class Application{
     float bodyThickness = 5;
     uint dotSize = 1;
     
-    
     uint width;
     uint height;
     string windowTitle;
@@ -25,13 +24,13 @@ class Application{
     Font vt323 = new Font("VT323-Regular.ttf");
 
     Patterns patterns;
+    VectorCalculations vectorCalculations = new VectorCalculations();
 
     public enum PatternStates{
         TRIANGLE,
         CIRCLE,
         HEXAGON,
     }
-
 
     PatternStates myPattern;
     public Application(uint Width, uint Height, string Title, PatternStates pattern){
@@ -85,7 +84,7 @@ class Application{
             specialPoints[i] = new CircleShape(5){
             FillColor = Color.Green,
             Origin = new Vector2f(5,5),
-            Position = SpecialPosition(angles[i], body)
+            Position = vectorCalculations.SpecialPosition(bodySize, angles[i], body)
             };
         }
         #endregion
@@ -111,7 +110,6 @@ class Application{
             foreach(CircleShape points in specialPoints){
                 window.Draw(points);
             }
-
 
             // display first dot, then start the algorithm
             if(dots.Count > 0){
@@ -156,21 +154,5 @@ class Application{
 
         iterationCount++;
         patternCount--;
-    }
-
-    
-
-    
-
-    Vector2f SpecialPosition(float angle, CircleShape body){
-        float radians = DegToRad(angle);
-        float xCoordinate = body.Position.X + (bodySize * MathF.Cos(radians));
-        float YCoordinate = body.Position.Y - (bodySize * MathF.Sin(radians));
-
-        return new Vector2f(xCoordinate, YCoordinate);
-    }
-
-    float DegToRad(float degree){
-        return degree * (MathF.PI / 180);
     }
 }
