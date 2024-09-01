@@ -24,14 +24,17 @@ class Application{
 
     Font vt323 = new Font("VT323-Regular.ttf");
 
-    public enum Pattern{
+    Patterns patterns;
+
+    public enum PatternStates{
         TRIANGLE,
-        CIRCLE
+        CIRCLE,
+        HEXAGON,
     }
 
 
-    Pattern myPattern;
-    public Application(uint Width, uint Height, string Title, Pattern pattern){
+    PatternStates myPattern;
+    public Application(uint Width, uint Height, string Title, PatternStates pattern){
         width = Width;
         height = Height;
         windowTitle = Title;
@@ -41,6 +44,7 @@ class Application{
         window = new RenderWindow(mode, windowTitle, Styles.Close);
         patternCount = patternCountMax;
 
+        patterns = new Patterns(specialPoints);
 
         #region Events
         window.Closed += (sender, args) => window.Close();
@@ -107,7 +111,9 @@ class Application{
             foreach(CircleShape points in specialPoints){
                 window.Draw(points);
             }
-            
+
+
+            // display first dot, then start the algorithm
             if(dots.Count > 0){
                 Dot? lastDot = null;
                 foreach(Dot dot in dots){
@@ -131,14 +137,16 @@ class Application{
         Vector2f specialPosition = new Vector2f(0,0);
         
         switch(myPattern){
-            case Pattern.TRIANGLE:
-                specialPosition = TrianglePattern(dot);
+            case PatternStates.TRIANGLE:
+                specialPosition = patterns.TrianglePattern(dot);
                 break;
-            case Pattern.CIRCLE:
-                specialPosition = CirclePattern(dot);
+            case PatternStates.CIRCLE:
+                specialPosition = patterns.CirclePattern(dot);
+                break;
+            case PatternStates.HEXAGON:
+                specialPosition = patterns.HexagonPattern(dot);
                 break;
         }
-        
 
         Dot newDot = new Dot(dotSize){
                     Position = specialPosition,
@@ -150,26 +158,9 @@ class Application{
         patternCount--;
     }
 
-    Vector2f CirclePattern(CircleShape dot){
-        Random random = new Random();
-        int randomPoint = random.Next(specialPoints.Count());
+    
 
-        Vector2f lineVector = specialPoints[randomPoint].Position - dot.Position;
-        Vector2f scaledVector = lineVector * 0.789f;
-
-        return dot.Position + scaledVector;
-    }
-
-    Vector2f TrianglePattern(CircleShape dot){
-        CircleShape[] newSpecialPoints = [specialPoints[3], specialPoints[7], specialPoints[11]];
-
-        Random random = new Random();
-        int randomPoint = random.Next(newSpecialPoints.Count());
-
-        float midpointX = (dot.Position.X + newSpecialPoints[randomPoint].Position.X) / 2;
-        float midpointY = (dot.Position.Y + newSpecialPoints[randomPoint].Position.Y) / 2;
-        return new Vector2f(midpointX, midpointY);
-    }
+    
 
     Vector2f SpecialPosition(float angle, CircleShape body){
         float radians = DegToRad(angle);
