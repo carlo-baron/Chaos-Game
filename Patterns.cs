@@ -12,7 +12,7 @@ class Patterns{
         Random random = new Random();
         int randomPoint = random.Next(specialPoints.Count());
 
-        Vector2f scaledVector = LineVector(specialPoints, randomPoint, dot, 0.789f);
+        Vector2f scaledVector = vectorCalculations.LineVector(specialPoints, randomPoint, dot, 0.789f);
 
         return dot.Position + scaledVector;
     }
@@ -35,13 +35,8 @@ class Patterns{
         Random random = new Random();
         int randomPoint = random.Next(hexagonVertices.Count());
 
-        Vector2f scaledVector = LineVector(hexagonVertices, randomPoint, dot, 0.667f);
+        Vector2f scaledVector = vectorCalculations.LineVector(hexagonVertices, randomPoint, dot, 0.667f);
 
         return dot.Position + scaledVector;
-    }
-
-    Vector2f LineVector(CircleShape[] specialPoints,int randomPoint, CircleShape dot,float sizeMultiplier){
-        Vector2f lineVector = specialPoints[randomPoint].Position - dot.Position;
-        return lineVector * sizeMultiplier;
-    }
+    }    
 }

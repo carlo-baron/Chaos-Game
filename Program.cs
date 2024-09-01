@@ -1,4 +1,6 @@
-﻿class Program{
+﻿using System.Threading;
+
+class Program{
     public static void Main(){
         Application app = new Application(500,500, "Nice Pattern", Application.PatternStates.TRIANGLE);
     }
