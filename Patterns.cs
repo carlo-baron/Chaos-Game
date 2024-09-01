@@ -2,8 +2,9 @@ using SFML.Graphics;
 using SFML.System;
 
 class Patterns{
-
     CircleShape[] specialPoints;
+    VectorCalculations vectorCalculations = new VectorCalculations();
+
     public Patterns(CircleShape[] points){
         specialPoints = points;
     }
@@ -23,10 +24,7 @@ class Patterns{
         Random random = new Random();
         int randomPoint = random.Next(triangleVertices.Count());
 
-        float midpointX = (dot.Position.X + triangleVertices[randomPoint].Position.X) / 2;
-        float midpointY = (dot.Position.Y + triangleVertices[randomPoint].Position.Y) / 2;
-        
-        return new Vector2f(midpointX, midpointY);
+        return vectorCalculations.MidPoint(dot.Position, triangleVertices[randomPoint].Position);
     }
 
     public Vector2f HexagonPattern(CircleShape dot){

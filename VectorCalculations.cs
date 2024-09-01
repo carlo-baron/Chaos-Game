@@ -13,4 +13,8 @@ class VectorCalculations{
     float DegToRad(float degree){
         return degree * (MathF.PI / 180);
     }
+
+    public Vector2f MidPoint(Vector2f vector1, Vector2f vector2){
+        return new Vector2f((vector1.X + vector2.X) / 2, (vector1.Y + vector2.Y) / 2);
+    }
 }
