@@ -15,9 +15,9 @@ class Menu : Scene{
         Vector2f buttonSize = new Vector2f(200,75);
 
         startButton = new Button(buttonSize){
-            Origin = FindCenter.Rectangle(buttonSize),
-            Position = new Vector2f(FindCenter.Rectangle(floatWindowSize).X, FindCenter.Rectangle(floatWindowSize).Y - 50)
+            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y - 50),
         };
+        shapes.Add(startButton);
 
         startText = new Text(){
             Font = Datas.vt323,
@@ -25,16 +25,16 @@ class Menu : Scene{
             CharacterSize = textSize,
             FillColor = Color.Black,
         };
-
         FloatRect startTextSize = startText.GetGlobalBounds();
-
         startText.Origin = new Vector2f(startTextSize.Width / 2, startTextSize.Height / 2 + startText.CharacterSize / 2);
         startText.Position = startButton.Position;
 
+        shapes.Add(startText);
+
         quitButton = new Button(buttonSize){
-            Origin = FindCenter.Rectangle(buttonSize),
-            Position = new Vector2f(FindCenter.Rectangle(floatWindowSize).X, FindCenter.Rectangle(floatWindowSize).Y + 50)
+            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 50),
         };
+        shapes.Add(quitButton);
 
         closeText = new Text(){
             Font = Datas.vt323,
@@ -42,11 +42,11 @@ class Menu : Scene{
             CharacterSize = textSize,
             FillColor = Color.Black,
         };
-
         FloatRect closeTextSize = closeText.GetGlobalBounds();
-
         closeText.Origin = new Vector2f(closeTextSize.Width / 2, closeTextSize.Height / 2 + textSize/2);
         closeText.Position = quitButton.Position;
+
+        shapes.Add(closeText);
         #endregion
 
         #region Events
@@ -55,11 +55,6 @@ class Menu : Scene{
         quitButton.Click += (sender, args) => QuitButton();
         #endregion
     }
-
-    public override Drawable[] Shapes(){
-        return [startButton, quitButton, startText, closeText];
-    }
-
     public override void Functions(){
         startButton.OnClickBehavior(windowData);
         quitButton.OnClickBehavior(windowData);
@@ -68,7 +63,7 @@ class Menu : Scene{
     void StartButton(){
         windowData.Close();
         PatternsOptionScene patterns = new PatternsOptionScene();
-        Program.MainLoop(patterns, patterns.Shapes());
+        Program.MainLoop(patterns);
     }
 
     void QuitButton(){

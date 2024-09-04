@@ -5,17 +5,17 @@ class Program{
     static Menu menu = new Menu();
     static void Main(){
 
-        MainLoop(menu, menu.Shapes());
+        MainLoop(menu);
     }
 
-    public static void MainLoop(Scene scene, params Drawable[] shapes){
+    public static void MainLoop(Scene scene){
         while(scene.windowData.IsOpen){
             scene.windowData.DispatchEvents();
             scene.windowData.Clear();
 
             scene.Functions();
 
-            foreach(Drawable shape in shapes){
+            foreach(Drawable shape in scene.Shapes()){
                 scene.windowData.Draw(shape);
             }
 

@@ -33,4 +33,8 @@ class FindCenter{
     public static Vector2f Circle(float radius){
         return new Vector2f(radius, radius);
     }
+
+    public static Vector2f Window(RenderWindow window){
+        return new Vector2f(window.Size.X / 2, window.Size.Y / 2);
+    }
 }

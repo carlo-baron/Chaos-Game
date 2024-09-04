@@ -4,7 +4,9 @@ using SFML.Window;
 using VectorCalculations;
 
 class Button : RectangleShape{
-    public Button(Vector2f size) : base(size){}
+    public Button(Vector2f size) : base(size){
+        Origin = FindCenter.Rectangle(Size);
+    }
 
     public delegate void OnClickEventHandler(object source, EventArgs eventArgs);
     public event OnClickEventHandler? Click;

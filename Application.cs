@@ -97,7 +97,7 @@ class Application : Scene
         };
         #endregion
     }
-    
+
     public override void Functions()
     {
         windowData.Draw(body);
@@ -124,11 +124,6 @@ class Application : Scene
             }
         }
         windowData.Draw(iteration);
-    }
-
-    public override Drawable[] Shapes()
-    {
-        return [];
     }
 
     void PatternMakingBehavior(CircleShape dot)
