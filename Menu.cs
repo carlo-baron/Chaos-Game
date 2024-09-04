@@ -8,7 +8,7 @@ class Menu : Scene{
     Text startText;
     Text closeText;
     uint textSize = 48;
-    public Menu() : base(){
+    public Menu() : base("Menu"){
         Vector2f floatWindowSize = new Vector2f(windowData.Size.X, windowData.Size.Y);
 
         #region Shapes and Texts

@@ -1,10 +1,9 @@
 using SFML.Graphics;
 using SFML.System;
-using VectorCalculations;
 
 class PatternsOptionScene : Scene{
     Button backButton;
-    public PatternsOptionScene() : base(){
+    public PatternsOptionScene() : base("Pattern Options"){
         Vector2f floatWindowSize = new Vector2f(windowData.Size.X, windowData.Size.Y);
         
         #region Shapes and Texts
