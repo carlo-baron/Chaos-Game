@@ -1,6 +1,7 @@
 using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
+using VectorCalculations;
 
 class Application{
     RenderWindow window;
@@ -24,8 +25,6 @@ class Application{
     Font vt323 = new Font("VT323-Regular.ttf");
 
     Patterns patterns;
-    VectorCalculations vectorCalculations = new VectorCalculations();
-
     public enum PatternStates{
         TRIANGLE,
         CIRCLE,
@@ -85,7 +84,7 @@ class Application{
             specialPoints[i] = new CircleShape(5){
             FillColor = Color.Green,
             Origin = new Vector2f(5,5),
-            Position = vectorCalculations.SpecialPosition(bodySize, angles[i], body)
+            Position = Points.SpecialPosition(bodySize, angles[i], body)
             };
         }
         #endregion

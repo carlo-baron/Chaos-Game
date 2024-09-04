@@ -1,9 +1,8 @@
 using SFML.Graphics;
 using SFML.System;
-
+using VectorCalculations;
 class Patterns{
     CircleShape[] specialPoints;
-    VectorCalculations vectorCalculations = new VectorCalculations();
 
     public Patterns(CircleShape[] points){
         specialPoints = points;
@@ -12,7 +11,7 @@ class Patterns{
         Random random = new Random();
         int randomPoint = random.Next(specialPoints.Count());
 
-        Vector2f scaledVector = vectorCalculations.LineVector(specialPoints, randomPoint, dot, 0.789f);
+        Vector2f scaledVector = Points.LineVector(specialPoints, randomPoint, dot, 0.789f);
 
         return dot.Position + scaledVector;
     }
@@ -24,7 +23,7 @@ class Patterns{
         Random random = new Random();
         int randomPoint = random.Next(triangleVertices.Count());
 
-        return vectorCalculations.MidPoint(dot.Position, triangleVertices[randomPoint].Position);
+        return Points.MidPoint(dot.Position, triangleVertices[randomPoint].Position);
     }
 
     public Vector2f HexagonPattern(CircleShape dot){
@@ -35,7 +34,7 @@ class Patterns{
         Random random = new Random();
         int randomPoint = random.Next(hexagonVertices.Count());
 
-        Vector2f scaledVector = vectorCalculations.LineVector(hexagonVertices, randomPoint, dot, 0.667f);
+        Vector2f scaledVector = Points.LineVector(hexagonVertices, randomPoint, dot, 0.667f);
 
         return dot.Position + scaledVector;
     }
