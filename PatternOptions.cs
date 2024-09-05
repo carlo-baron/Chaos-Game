@@ -1,5 +1,6 @@
 using VectorCalculations;
 using SFML.System;
+using System.ComponentModel;
 
 class PatternsOptionScene : Scene{
     Button backButton;
@@ -15,6 +16,7 @@ class PatternsOptionScene : Scene{
         
         #region Shapes and Texts
         backButton = new Button(new Vector2f(50,50));
+        backButton.Origin = new Vector2f(0,0);
 
         // options
         triangle = new Button(optionSize){
@@ -40,11 +42,19 @@ class PatternsOptionScene : Scene{
         #region Events
         windowData.Closed += (sender, args) => windowData.Close();
         backButton.Click += (sender, args) => BackButton();
+        triangle.Click += (sender, args) => RunPattern(Application.PatternStates.TRIANGLE);
+        circle.Click += (sender, args) => RunPattern(Application.PatternStates.CIRCLE);
+        hexagon.Click += (sender, args) => RunPattern(Application.PatternStates.HEXAGON);
+        carpet.Click += (sender, args) => RunPattern(Application.PatternStates.CARPET);
         #endregion
     }
     public override void Functions()
     {
         backButton.OnClickBehavior(windowData);
+        triangle.OnClickBehavior(windowData);
+        circle.OnClickBehavior(windowData);
+        hexagon.OnClickBehavior(windowData);
+        carpet.OnClickBehavior(windowData);
     }
     void BackButton(){
         windowData.Close();

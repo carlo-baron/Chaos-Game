@@ -4,7 +4,6 @@ class Program{
 
     static Menu menu = new Menu();
     static void Main(){
-
         MainLoop(menu);
     }
 

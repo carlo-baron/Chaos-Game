@@ -4,6 +4,7 @@ using SFML.Window;
 using VectorCalculations;
 
 class Button : RectangleShape{
+    bool isClicked = false;
     public Button(Vector2f size) : base(size){
         Origin = FindCenter.Rectangle(Size);
     }
@@ -12,12 +13,15 @@ class Button : RectangleShape{
     public event OnClickEventHandler? Click;
 
     public void OnClickBehavior(RenderWindow windowData){
-        bool isClicked = Mouse.IsButtonPressed(Mouse.Button.Left);
+        windowData.MouseButtonPressed += (sender, args) => isClicked = true;
+        windowData.MouseButtonReleased += (sender, args) => isClicked = false;
         bool isHovered = ButtonHoverCheck(windowData);
 
         if(isClicked && isHovered){
             OnClick();
         }
+
+        isClicked = false;
     }
 
     protected virtual void OnClick(){
