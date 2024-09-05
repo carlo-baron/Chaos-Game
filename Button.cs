@@ -14,7 +14,6 @@ class Button : RectangleShape{
 
     public void OnClickBehavior(RenderWindow windowData){
         windowData.MouseButtonPressed += (sender, args) => isClicked = true;
-        windowData.MouseButtonReleased += (sender, args) => isClicked = false;
         bool isHovered = ButtonHoverCheck(windowData);
 
         if(isClicked && isHovered){
