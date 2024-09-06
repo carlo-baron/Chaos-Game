@@ -5,8 +5,8 @@ using VectorCalculations;
 class Menu : Scene{
     Button startButton;
     Button quitButton;
-    Text startText;
-    Text closeText;
+    ButtonLabel startText;
+    ButtonLabel closeText;
     uint textSize = 48;
     public Menu() : base("Menu"){
         Vector2f floatWindowSize = new Vector2f(windowData.Size.X, windowData.Size.Y);
@@ -19,32 +19,19 @@ class Menu : Scene{
         };
         shapes.Add(startButton);
 
-        startText = new Text(){
-            Font = Datas.vt323,
-            DisplayedString = "Start",
-            CharacterSize = textSize,
-            FillColor = Color.Black,
-        };
-        startText.Origin = FindCenter.Text(startText);
-        startText.Position = startButton.Position;
 
-        shapes.Add(startText);
 
         quitButton = new Button(buttonSize){
             Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 50),
         };
         shapes.Add(quitButton);
 
-        closeText = new Text(){
-            Font = Datas.vt323,
-            DisplayedString = "Quit",
-            CharacterSize = textSize,
-            FillColor = Color.Black,
-        };
-        closeText.Origin = FindCenter.Text(closeText);
-        closeText.Position = quitButton.Position;
+        startText = new ButtonLabel("Start",textSize, startButton);
+        shapes.Add(startText);
 
+        closeText = new ButtonLabel("Quit", textSize, quitButton);
         shapes.Add(closeText);
+
         #endregion
 
         #region Events

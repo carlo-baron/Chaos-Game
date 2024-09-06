@@ -1,8 +1,9 @@
 using VectorCalculations;
 using SFML.System;
-using System.ComponentModel;
+using SFML.Graphics;
 
-class PatternsOptionScene : Scene{
+class PatternsOptionScene : Scene
+{
     Button backButton;
 
     Button triangle;
@@ -10,33 +11,57 @@ class PatternsOptionScene : Scene{
     Button hexagon;
     Button carpet;
 
-    Vector2f optionSize = new Vector2f(200, 75);
-    public PatternsOptionScene() : base("Pattern Options"){
-        Vector2f floatWindowSize = new Vector2f(windowData.Size.X, windowData.Size.Y);
-        
-        #region Shapes and Texts
-        backButton = new Button(new Vector2f(50,50));
-        backButton.Origin = new Vector2f(0,0);
+    ButtonLabel triangleText;
+    ButtonLabel circleText;
+    ButtonLabel hexagonText;
+    ButtonLabel carpetText;
 
+    Vector2f optionSize = new Vector2f(200, 75);
+    uint textSize = 36;
+    public PatternsOptionScene() : base("Pattern Options")
+    {
+        Vector2f floatWindowSize = new Vector2f(windowData.Size.X, windowData.Size.Y);
+
+        #region Shapes
+        backButton = new Button(new Vector2f(50, 50))
+        {
+            Origin = new Vector2f(0, 0)
+        };
         // options
-        triangle = new Button(optionSize){
+        triangle = new Button(optionSize)
+        {
             Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y - 150),
         };
-        circle = new Button(optionSize){
+        circle = new Button(optionSize)
+        {
             Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y - 50),
         };
-        hexagon = new Button(optionSize){
+        hexagon = new Button(optionSize)
+        {
             Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 50),
         };
-        carpet = new Button(optionSize){
+        carpet = new Button(optionSize)
+        {
             Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 150),
         };
-        
+
         shapes.Add(triangle);
         shapes.Add(circle);
         shapes.Add(hexagon);
         shapes.Add(carpet);
         shapes.Add(backButton);
+        #endregion
+
+        #region Texts
+        triangleText = new ButtonLabel("TRIANGLE", textSize, triangle);
+        circleText = new ButtonLabel("CIRCLE", textSize, circle);
+        hexagonText = new ButtonLabel("HEXAGON", textSize, hexagon);
+        carpetText = new ButtonLabel("CARPET", textSize, carpet);
+
+        shapes.Add(triangleText);
+        shapes.Add(circleText);
+        shapes.Add(hexagonText);
+        shapes.Add(carpetText);
         #endregion
 
         #region Events
@@ -56,13 +81,15 @@ class PatternsOptionScene : Scene{
         hexagon.OnClickBehavior(windowData);
         carpet.OnClickBehavior(windowData);
     }
-    void BackButton(){
+    void BackButton()
+    {
         windowData.Close();
         Menu menu = new Menu();
         Program.MainLoop(menu);
     }
 
-    void RunPattern(Application.PatternStates state){
+    void RunPattern(Application.PatternStates state)
+    {
         windowData.Close();
         Application patternApp = new Application(state);
         Program.MainLoop(patternApp);
