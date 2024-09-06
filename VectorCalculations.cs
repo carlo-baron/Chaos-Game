@@ -37,4 +37,9 @@ class FindCenter{
     public static Vector2f Window(RenderWindow window){
         return new Vector2f(window.Size.X / 2, window.Size.Y / 2);
     }
+
+    public static Vector2f Text(Text text){
+        Vector2f center = text.GetGlobalBounds().Size / 2;
+        return center + text.GetLocalBounds().Position;
+    }
 }

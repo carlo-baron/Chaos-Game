@@ -25,8 +25,7 @@ class Menu : Scene{
             CharacterSize = textSize,
             FillColor = Color.Black,
         };
-        FloatRect startTextSize = startText.GetGlobalBounds();
-        startText.Origin = new Vector2f(startTextSize.Width / 2, startTextSize.Height / 2 + startText.CharacterSize / 2);
+        startText.Origin = FindCenter.Text(startText);
         startText.Position = startButton.Position;
 
         shapes.Add(startText);
@@ -42,8 +41,7 @@ class Menu : Scene{
             CharacterSize = textSize,
             FillColor = Color.Black,
         };
-        FloatRect closeTextSize = closeText.GetGlobalBounds();
-        closeText.Origin = new Vector2f(closeTextSize.Width / 2, closeTextSize.Height / 2 + textSize/2);
+        closeText.Origin = FindCenter.Text(closeText);
         closeText.Position = quitButton.Position;
 
         shapes.Add(closeText);

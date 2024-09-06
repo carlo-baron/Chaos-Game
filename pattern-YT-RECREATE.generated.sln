@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pattern-YT-RECREATE", "pattern-YT-RECREATE.csproj", "{108C4E47-8889-4A22-9711-89BF0DCDE112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pattern-YT-RECREATE", "pattern-YT-RECREATE.csproj", "{3A08931C-496A-489F-A149-174295ABA4E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{108C4E47-8889-4A22-9711-89BF0DCDE112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{108C4E47-8889-4A22-9711-89BF0DCDE112}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{108C4E47-8889-4A22-9711-89BF0DCDE112}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{108C4E47-8889-4A22-9711-89BF0DCDE112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A08931C-496A-489F-A149-174295ABA4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A08931C-496A-489F-A149-174295ABA4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A08931C-496A-489F-A149-174295ABA4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A08931C-496A-489F-A149-174295ABA4E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
