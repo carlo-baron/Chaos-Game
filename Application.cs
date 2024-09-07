@@ -2,6 +2,7 @@ using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
 using VectorCalculations;
+using System;
 
 class Application : Scene
 {
@@ -12,7 +13,7 @@ class Application : Scene
     bool firstDot = true;
     List<Dot> dots = new List<Dot>();
 
-    CircleShape[] specialPoints = new CircleShape[12];
+    public static CircleShape[] specialPoints = new CircleShape[12];
     float[] angles = { 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 };
 
     Text iteration;
@@ -25,7 +26,7 @@ class Application : Scene
     public enum PatternStates
     {
         TRIANGLE,
-        CIRCLE,
+        DODECAGON,
         HEXAGON,
         CARPET,
     }
@@ -36,7 +37,7 @@ class Application : Scene
         myPattern = pattern;
         patternCount = patternCountMax;
 
-        patterns = new Patterns(specialPoints);
+        patterns = new Patterns();
 
         #region Shapes and Texts
         body = new CircleShape(bodySize)
@@ -100,11 +101,16 @@ class Application : Scene
 
     public override void Functions()
     {
-        windowData.Draw(body);
-        foreach (CircleShape points in specialPoints)
-        {
-            windowData.Draw(points);
+        foreach(RectangleShape line in Body.PatternBody(myPattern)){
+            windowData.Draw(line);
         }
+
+        //optional
+        // foreach (CircleShape points in specialPoints)
+        // {
+        //     windowData.Draw(points);
+        // }
+
         // display first dot, then start the algorithm
         if (dots.Count > 0)
         {
@@ -135,8 +141,8 @@ class Application : Scene
             case PatternStates.TRIANGLE:
                 specialPosition = patterns.TrianglePattern(dot);
                 break;
-            case PatternStates.CIRCLE:
-                specialPosition = patterns.CirclePattern(dot);
+            case PatternStates.DODECAGON:
+                specialPosition = patterns.DodecagonPattern(dot);
                 break;
             case PatternStates.HEXAGON:
                 specialPosition = patterns.HexagonPattern(dot);
