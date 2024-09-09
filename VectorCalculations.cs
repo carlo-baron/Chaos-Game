@@ -24,9 +24,9 @@ class Points
         return new Vector2f((vector1.X + vector2.X) / 2, (vector1.Y + vector2.Y) / 2);
     }
 
-    public static Vector2f LineVector(CircleShape[] specialPoints, int randomPoint, CircleShape dot, float sizeMultiplier)
+    public static Vector2f LineVector(Vector2f[] specialPoints, int randomPoint, CircleShape dot, float sizeMultiplier)
     {
-        Vector2f lineVector = specialPoints[randomPoint].Position - dot.Position;
+        Vector2f lineVector = specialPoints[randomPoint] - dot.Position;
         return lineVector * sizeMultiplier;
     }
 
