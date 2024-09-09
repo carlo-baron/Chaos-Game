@@ -4,7 +4,7 @@ using SFML.System;
 class Body{
     static Patterns patterns = new Patterns();
 
-    public static RectangleShape[] PatternBody(Application.PatternStates state){
+    public static RectangleShape[] PatternBodyLines(Application.PatternStates state){
         switch(state){
             case Application.PatternStates.TRIANGLE:
                 return LineMaker(patterns.TriangleVertices);
@@ -12,6 +12,8 @@ class Body{
                 return LineMaker(patterns.Dodecagon);
             case Application.PatternStates.HEXAGON:
                 return LineMaker(patterns.HexagonVertices);
+            case Application.PatternStates.CARPET:
+                return LineMaker(patterns.squareBodyPoints);
             default:
                 return[];
         }

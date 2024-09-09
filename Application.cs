@@ -77,7 +77,7 @@ class Application : Scene
 
     public override void Functions()
     {
-        foreach(RectangleShape line in Body.PatternBody(myPattern)){
+        foreach(RectangleShape line in Body.PatternBodyLines(myPattern)){
             windowData.Draw(line);
         }
 

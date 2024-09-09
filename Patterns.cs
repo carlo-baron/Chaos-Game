@@ -36,11 +36,23 @@ class Patterns
 
     public Vector2f[] squareBodyPoints
     {
+        get { return Points.RectangleVertices(squareBody); }
+        private set { }
+    }
+
+    public Vector2f[] VicsekPoints
+    {
         get
         {
-            return Points.RectangleVertices(squareBody);
+            return VicsekPoints;
         }
-        private set { }
+
+        private set
+        {
+            List<Vector2f> squarePoints = squareBodyPoints.ToList();
+            squarePoints.Add(squareBody.Position);
+            VicsekPoints = squarePoints.ToArray();
+        }
     }
 
     public Vector2f[] TriangleVertices
