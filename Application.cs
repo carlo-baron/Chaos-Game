@@ -10,6 +10,7 @@ class Application : Scene
     bool firstDot = true;
     List<Dot> dots = new List<Dot>();
     Text iteration;
+    Button backButton;
 
     int patternCount;
     int patternCountMax = 10000;
@@ -33,7 +34,6 @@ class Application : Scene
         patterns = new Patterns();
 
         #region Shapes and Texts
-        
 
         iteration = new Text()
         {
@@ -42,9 +42,16 @@ class Application : Scene
             CharacterSize = 24,
             Position = new Vector2f(5, 5)
         };
+
+        backButton = new Button(new Vector2f(50, 50))
+        {
+            Origin = new Vector2f(0, 0),
+            Position = new Vector2f(windowData.Size.X - 50, 0)
+        };
         #endregion
 
         #region Events
+        backButton.Click += (sender, args) => BackButton();
         windowData.Closed += (sender, args) => windowData.Close();
         windowData.KeyPressed += (sender, args) =>
         {
@@ -54,6 +61,7 @@ class Application : Scene
                 dots.Clear();
                 patternCount = patternCountMax;
                 iterationCount = 0;
+                iteration.DisplayedString = $"Iteration: {iterationCount}";
                 firstDot = true;
             }
         };
@@ -77,6 +85,8 @@ class Application : Scene
 
     public override void Functions()
     {
+        backButton.OnClickBehavior(windowData);
+        windowData.Draw(backButton);
         foreach(RectangleShape line in Body.PatternBodyLines(myPattern)){
             windowData.Draw(line);
         }
@@ -133,4 +143,9 @@ class Application : Scene
         patternCount--;
     }
 
+    void BackButton(){
+        windowData.Close();
+        PatternsOptionScene patternsOption = new PatternsOptionScene();
+        Program.MainLoop(patternsOption);
+    }
 }

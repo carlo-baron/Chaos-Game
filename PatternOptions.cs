@@ -25,7 +25,8 @@ class PatternsOptionScene : Scene
         #region Shapes
         backButton = new Button(new Vector2f(50, 50))
         {
-            Origin = new Vector2f(0, 0)
+            Origin = new Vector2f(0, 0),
+            Position = new Vector2f(windowData.Size.X - 50, 0)
         };
         // options
         triangle = new Button(optionSize)
