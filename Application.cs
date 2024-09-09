@@ -117,6 +117,9 @@ class Application : Scene
             case PatternStates.HEXAGON:
                 specialPosition = patterns.HexagonPattern(dot);
                 break;
+            case PatternStates.CARPET:
+                specialPosition = patterns.CarpetPattern(dot);
+                break;
         }
 
         Dot newDot = new Dot(dotSize)

@@ -41,15 +41,13 @@ class Patterns
     {
         get
         {
-            return VicsekPoints;
+            List<Vector2f> squarePoints = squareBodyPoints.ToList();
+            squarePoints.Add(squareBody.Position);
+            return squarePoints.ToArray();
         }
 
         private set
-        {
-            List<Vector2f> squarePoints = squareBodyPoints.ToList();
-            squarePoints.Add(squareBody.Position);
-            VicsekPoints = squarePoints.ToArray();
-        }
+        {}
     }
 
     public Vector2f[] TriangleVertices
@@ -105,9 +103,6 @@ class Patterns
 
     public Vector2f HexagonPattern(CircleShape dot)
     {
-        // CircleShape[] hexagonVertices = [specialPoints[1], specialPoints[3], specialPoints[5],
-        //                                 specialPoints[7], specialPoints[9], specialPoints[11]];
-
         Random random = new Random();
         int randomPoint = random.Next(HexagonVertices.Count());
 
