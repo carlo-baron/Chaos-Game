@@ -15,14 +15,14 @@ class Menu : Scene{
         Vector2f buttonSize = new Vector2f(200,75);
 
         startButton = new Button(buttonSize){
-            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y - 50),
+            Position = new Vector2f(FindCenter.Window().X, FindCenter.Window().Y - 50),
         };
         shapes.Add(startButton);
 
 
 
         quitButton = new Button(buttonSize){
-            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 50),
+            Position = new Vector2f(FindCenter.Window().X, FindCenter.Window().Y + 50),
         };
         shapes.Add(quitButton);
 

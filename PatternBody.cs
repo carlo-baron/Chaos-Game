@@ -32,15 +32,3 @@ class Body{
         return lines.ToArray();
     }
 }
-
-
-// Vector2f rotation = specialPoints[2].Position - specialPoints[0].Position;
-// float length = Vectors.Magnitude(rotation);
-// float degrees = MathF.Atan2(rotation.Y, rotation.X) * (180/MathF.PI);
-// Console.WriteLine(degrees);
-// line1 = new RectangleShape(new Vector2f(length, 5)){
-//     FillColor = Color.Blue,
-//     Origin = new Vector2f(0, 5 / 2),
-//     Position = specialPoints[0].Position,
-//     Rotation = degrees,
-// };

@@ -30,19 +30,19 @@ class PatternsOptionScene : Scene
         // options
         triangle = new Button(optionSize)
         {
-            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y - 150),
+            Position = new Vector2f(FindCenter.Window().X, FindCenter.Window().Y - 150),
         };
         dodecagon = new Button(optionSize)
         {
-            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y - 50),
+            Position = new Vector2f(FindCenter.Window().X, FindCenter.Window().Y - 50),
         };
         hexagon = new Button(optionSize)
         {
-            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 50),
+            Position = new Vector2f(FindCenter.Window().X, FindCenter.Window().Y + 50),
         };
         carpet = new Button(optionSize)
         {
-            Position = new Vector2f(FindCenter.Window(windowData).X, FindCenter.Window(windowData).Y + 150),
+            Position = new Vector2f(FindCenter.Window().X, FindCenter.Window().Y + 150),
         };
 
         shapes.Add(triangle);

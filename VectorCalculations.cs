@@ -1,5 +1,6 @@
 using SFML.System;
 using SFML.Graphics;
+using SFML.Window;
 
 namespace VectorCalculations;
 class Points
@@ -28,6 +29,19 @@ class Points
         Vector2f lineVector = specialPoints[randomPoint].Position - dot.Position;
         return lineVector * sizeMultiplier;
     }
+
+    public static Vector2f[] RectangleVertices(RectangleShape rectangle){
+        float halfedWidth = rectangle.Size.X / 2;
+        float halfedheight = rectangle.Size.Y / 2;
+        Vector2f rectanglePosition = rectangle.Position;
+
+        Vector2f topLeft = rectanglePosition + new Vector2f(-halfedheight, -halfedheight);
+        Vector2f topRight = rectanglePosition + new Vector2f(halfedheight, -halfedheight);
+        Vector2f bottomRight = rectanglePosition + new Vector2f(halfedWidth, halfedheight);
+        Vector2f bottomLeft = rectanglePosition + new Vector2f(-halfedheight, halfedheight);
+
+        return [topLeft, topRight, bottomRight, bottomLeft];
+    }
 }
 
 class FindCenter
@@ -42,8 +56,9 @@ class FindCenter
         return new Vector2f(radius, radius);
     }
 
-    public static Vector2f Window(RenderWindow window)
+    public static Vector2f Window()
     {
+        RenderWindow window = Datas.window!;
         return new Vector2f(window.Size.X / 2, window.Size.Y / 2);
     }
 
